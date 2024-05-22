@@ -6,7 +6,7 @@ Caso deseja citar este trabalho, você pode utilizar o seguinte Bibtex:
 
 
 ```
-@inproceedings{pacifico2020sistema,
+@inproceedings{wanghamtestbeds2024,
   title={Testbeds para Pesquisa Experimental em Cibersegurança: Da Teoria à Prática},
   author={Wangham, Michele S.
   and Meyer, Bruno H. and Khalil, G. Q. de Santana and de Campos, Luiz Eduardo Folly and de Mello,Emerson Ribeiro},
@@ -70,7 +70,8 @@ Esses arquivos descrevem dois ataques DDoS considerando o seguinte cenário:
 Linha do tempo (segundos):
 - **0 - 20**: Os containers iniciam, o server fica disponível e os clientes iniciam suas requisições
 - **20 - 30**: Os atacantes **iniciam o DDoS** enquanto os clientes continuam tentando acessar o servidor
-- **30 em diante**: O ataque acaba e os clientes continuam tentando acessar o servidor
+- **30 - 60**: O ataque acaba e os clientes continuam tentando acessar o servidor
+- **60 em diante**: Os clientes param de realizar requisições
 
 
 Para definir os softwares e configurações que serão executadas em cada nós, é necessário criar a lista de `containers` equivalente a uma definiçãod e Pods no Kubernetes. Por exemplo:
@@ -144,6 +145,7 @@ Running experiment analyzer...
 Experiment analyzer finished
 ```
 
+Nos logs anteriores, três intervalos (grupos) foram considerados: Pré-ataque, Ataque e pós-ataque. A média de cada grupo representa o tempo médio no intervalo para obter uma resposta do servidor.
 
 Agora, troque de diretório e execute o script para analizar os resultados do tráfego de rede: 
 

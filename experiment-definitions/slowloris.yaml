@@ -16,7 +16,7 @@ Experiment:
             - name: TIMEOUT_CMD
               value: "60"
         - name: 'server'
-          image: ghcr.io/mentored/generic-apache-flask-webserver:latest
+          image: ghcr.io/mentoredtestbed/generic-apache-flask-webserver:latest
           imagePullPolicy: "Always"
           securityContext:
             privileged: true
