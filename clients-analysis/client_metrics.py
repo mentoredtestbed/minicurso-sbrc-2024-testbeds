@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
     for data in csv_data:
         group1 = data[data[:, 0] < preattack]
-        group2 = data[(data[:, 0] >= preattack) & (data[:, 1] < postattack)]
+        group2 = data[(data[:, 0] >= preattack) & (data[:, 0] < postattack)]
         group3 = data[data[:, 0] >= postattack]
 
         group1_list += list(group1[:, 1])
@@ -49,7 +49,6 @@ if __name__ == '__main__':
     group1_mean = np.mean(group1_list, axis=0)
     group2_mean = np.mean(group2_list, axis=0)
     group3_mean = np.mean(group3_list, axis=0)
-
     print(args.directory + ' | Group 1 mean: {0:.3f}'.format(group1_mean))
     print(args.directory + ' | Group 2 mean: {0:.3f}'.format(group2_mean))
     print(args.directory + ' | Group 3 mean: {0:.3f}'.format(group3_mean))

@@ -8,13 +8,14 @@ POSTATTACK=$3
 
 echo "Extracting $EXPFILE"
 
-tar -zxf $EXPFILE -C .tmp_exp_analyzer
+tar -zxf $EXPFILE -C .tmp_exp_analyzer --wildcards '*client*'
+ls .tmp_exp_analyzer/
 
 echo "Extracted $EXPFILE"
 
-echo "Running experiment analyzer"
+echo "Running experiment analyzer..."
 cd .tmp_exp_analyzer
-for f in *.tar; do tar -xf "$f"; mv client_delay.csv ${f}.csv; done
+for f in *.tar; do tar -xf "$f"; [ -f client_delay.csv ] && mv client_delay.csv ${f}.csv; done
 
 cd ..
 
