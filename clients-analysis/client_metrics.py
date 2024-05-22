@@ -19,6 +19,10 @@ def read_csv_files(directory):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Read CSV files from a directory')
     parser.add_argument('directory', type=str, help='Directory containing CSV files')
+
+    parser.add_argument('-a', '--attack', type=int, help='Attack time in seconds')
+    parser.add_argument('-p', '--postattack', type=int, help='Post time in seconds')
+
     args = parser.parse_args()
 
     csv_data = read_csv_files(args.directory)
@@ -29,10 +33,13 @@ if __name__ == '__main__':
     group2_list = []
     group3_list = []
 
+    preattack = args.attack
+    postattack = args.postattack
+
     for data in csv_data:
-        group1 = data[data[:, 0] < 60]
-        group2 = data[(data[:, 0] >= 60) & (data[:, 1] < 240)]
-        group3 = data[data[:, 0] >= 240]
+        group1 = data[data[:, 0] < preattack]
+        group2 = data[(data[:, 0] >= preattack) & (data[:, 1] < postattack)]
+        group3 = data[data[:, 0] >= postattack]
 
         group1_list += list(group1[:, 1])
         group2_list += list(group2[:, 1])

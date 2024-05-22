@@ -1,21 +1,9 @@
 #! /bin/bash
 
-mkdir hping
-mkdir slowloris
+./experiment_analyzer.sh hping.tar.gz 60 240
 
-tar -zxf hping.tar.gz -C hping
-tar -zxf slowloris.tar.gz -C slowloris
+echo ""
+echo "#######################"
+echo ""
 
-cd hping
-for f in *.tar; do tar -xf "$f"; mv client_delay.csv ${f}.csv; done
-
-cd ../slowloris
-for f in *.tar; do tar -xf "$f"; mv client_delay.csv ${f}.csv; done
-
-cd ..
-
-python3 client_metrics.py hping
-python3 client_metrics.py slowloris
-
-rm -rf hping
-rm -rf slowloris
+./experiment_analyzer.sh slowloris.tar.gz 60 240
