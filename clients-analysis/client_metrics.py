@@ -38,6 +38,9 @@ if __name__ == '__main__':
 
     for data in csv_data:
         # Ignore the first 5 entries that can contain noise data
+        if len(data) == 0:
+            continue
+        
         data = data[5:, :]
         
         group1 = data[data[:, 0] < preattack]

@@ -4,6 +4,8 @@ Esse repositório tem como principal apresentar a atividade prática do minicurs
 
 O capítulo de livro pode ser acessado em [https://sbrc.sbc.org.br/2024/Ch5.pdf](https://sbrc.sbc.org.br/2024/Ch5.pdf)
 
+Os slides utilizados para apresentar o minicurso também está disponível em [./doc/sbrc2024_testbed_slide_presentation.pdf](./doc/sbrc2024_testbed_slide_presentation.pdf)
+
 Caso deseja citar este trabalho, você pode utilizar o seguinte Bibtex: 
 
 
@@ -11,7 +13,7 @@ Caso deseja citar este trabalho, você pode utilizar o seguinte Bibtex:
 @inproceedings{wanghamtestbeds2024,
   title={Testbeds para Pesquisa Experimental em Cibersegurança: Da Teoria à Prática},
   author={Wangham, Michele S.
-  and Meyer, Bruno H. and Khalil, G. Q. de Santana and de Campos, Luiz Eduardo Folly and de Mello,Emerson Ribeiro},
+  and Meyer, Bruno H. and de Santana, Khalil G. Q. and de Campos, Luiz Eduardo Folly and de Mello,Emerson Ribeiro},
   booktitle={Anais do XLII Simp{\'o}sio Brasileiro de Redes de Computadores e Sistemas Distribu{\'\i}dos},
   year={2024},
   organization={SBC}
