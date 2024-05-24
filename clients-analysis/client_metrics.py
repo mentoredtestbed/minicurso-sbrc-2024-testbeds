@@ -37,6 +37,9 @@ if __name__ == '__main__':
     postattack = args.postattack
 
     for data in csv_data:
+        # Ignore the first 5 entries that can contain noise data
+        data = data[5:, :]
+        
         group1 = data[data[:, 0] < preattack]
         group2 = data[(data[:, 0] >= preattack) & (data[:, 0] < postattack)]
         group3 = data[data[:, 0] >= postattack]

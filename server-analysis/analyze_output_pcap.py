@@ -34,7 +34,7 @@ def compute_metrics(data, freq='S'):
 
 
 
-def plot_metrics(throughput, packet_counts, freq, fontsize):
+def plot_metrics(throughput, packet_counts, freq, fontsize, expected_time):
 
     fig, ax1 = plt.subplots(figsize=(12, 6))
 
@@ -49,20 +49,28 @@ def plot_metrics(throughput, packet_counts, freq, fontsize):
 
 
     # Plot x axis as time
-
-    ax1.plot(throughput.index/1000000000, throughput.values/(2**20), color=color)
+    # "Recover" the initial part not captured in the pcap file
+    data_x = throughput.index/1000000000
+    if max(data_x) < expected_time:
+        data_x = dataX + (expected_time - max(data_x))
+    
+    ax1.plot(dataX, throughput.values/(2**20), color=color)
 
     ax1.tick_params(axis='y', labelcolor=color)
 
 
 
-    ax2 = ax1.twinx()  
+    ax2 = ax1.twinx()
 
     color = 'tab:blue'
 
     ax2.set_ylabel('Número de Pacotes', color=color, fontsize=fontsize, fontweight='bold')
 
-    ax2.plot(packet_counts.index/1000000000, packet_counts.values, color=color)
+    data_x = packet_counts.index/1000000000
+    if max(data_x) < expected_time:
+        data_x = dataX + (expected_time - max(data_x))
+
+    ax2.plot(data_x, packet_counts.values, color=color)
 
     ax2.tick_params(axis='y', labelcolor=color)
 
@@ -102,11 +110,15 @@ def main():
 
     parser.add_argument('-s', '--fontsize', dest='fontsize', type=int, default=12, help='Font size for the plot')
 
+    parser.add_argument('-t', '--expected_time', dest='time', type=int, default=60, help='Experiment expected time in seconds')
+
     args = parser.parse_args()
 
 
 
     file_path = args.input_file
+
+    expected_time = args.time
 
     # freq_options = {'S': 'Second', 'T': 'Minute', 'H': 'Hour', 'D': 'Day', 'M': 'Month', 'Y': 'Year'}
 
@@ -118,11 +130,13 @@ def main():
 
     
 
+    
+
     for freq, label in tqdm(freq_options.items(), desc="Computing and plotting metrics"):
 
         throughput, packet_counts = compute_metrics(data, freq=freq)
 
-        plot_metrics(throughput, packet_counts, label, args.fontsize)
+        plot_metrics(throughput, packet_counts, label, args.fontsize, expected_time)
 
 
 
