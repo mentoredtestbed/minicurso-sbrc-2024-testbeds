@@ -59,15 +59,21 @@ Esses arquivos consideram uma sintaxe que compartilha elementos com a [sintaxe d
 
 Esses arquivos descrevem dois ataques DDoS considerando o seguinte cenário:
 
-- 1 servidor Apache sendo executado em um servidor no **Rio de Janeiro** (`ids-go` para o slowloris) e Paraíba (`ids-pb` para o hping)
+#### Slowloris
+  - 1 servidor Apache sendo executado em um servidor em **Goiás** (`ids-go`)
   - Além do servidor Apache, um segundo container é usado para monitorar o tráfego de rede com o software `tshark`
-- 40 clientes em **Rio Grande do Norte** (`ids-pb`) acessando o servidor Apache com requisições web (HTTP) a cada 1 segundo
+  - 30 clientes em **Minas Gerais** (`ids-mg`) acessando o servidor Apache com requisições web (HTTP) a cada 1 segundo
   - Os clientes salvam o tempo de solicitação de cada requisição
   - O tempo da solicitação pode ser usado para mensurar a disponibilidade do servidor Apache
-- 30 nós atacando o servidor Apache usando os ataques DDoS slowloris ou hping
-  - 15 nós no **Rio Grande do Norte** (`ids-rn`)
-  - 15 nós em **Minas Gerais** (`ids-mg`)
+  - 10 nós em **Rio de Janeiro** (`ids-rj`) atacando o servidor Apache usando os ataques DDoS slowloris
 
+#### Hping
+ - 1 servidor Apache sendo executado em um servidor na **Paraíba** (`ids-pb`)
+  - Além do servidor Apache, um segundo container é usado para monitorar o tráfego de rede com o software `tshark`
+  - 30 clientes em **Rio Grande do Norte** (`ids-rn`) acessando o servidor Apache com requisições web (HTTP) a cada 1 segundo
+  - Os clientes salvam o tempo de solicitação de cada requisição
+  - O tempo da solicitação pode ser usado para mensurar a disponibilidade do servidor Apache
+  - 10 nós em **Pernambuco** (`ids-pe`) atacando o servidor Apache usando os ataques DDoS hping3 
 
 Linha do tempo (segundos):
 - **0 - 20**: Os containers iniciam, o server fica disponível e os clientes iniciam suas requisições
