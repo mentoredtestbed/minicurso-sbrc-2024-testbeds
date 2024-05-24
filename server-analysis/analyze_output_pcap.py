@@ -39,6 +39,9 @@ def plot_metrics(throughput, packet_counts, freq, fontsize, expected_time):
     fig, ax1 = plt.subplots(figsize=(12, 6))
 
 
+    # convert expected_time to Timedelta
+    expected_time = pd.Timedelta(seconds=expected_time)
+
 
     color = 'tab:red'
 
@@ -50,11 +53,15 @@ def plot_metrics(throughput, packet_counts, freq, fontsize, expected_time):
 
     # Plot x axis as time
     # "Recover" the initial part not captured in the pcap file
-    data_x = throughput.index/1000000000
+    # data_x = throughput.index/1000000000
+    data_x = throughput.index
+    print(max(throughput.index))
+    print(expected_time)
     if max(data_x) < expected_time:
-        data_x = dataX + (expected_time - max(data_x))
+        data_x = data_x + (expected_time - max(data_x))
+
     
-    ax1.plot(dataX, throughput.values/(2**20), color=color)
+    ax1.plot(data_x/1000000000, throughput.values/(2**20), color=color)
 
     ax1.tick_params(axis='y', labelcolor=color)
 
@@ -66,11 +73,11 @@ def plot_metrics(throughput, packet_counts, freq, fontsize, expected_time):
 
     ax2.set_ylabel('Número de Pacotes', color=color, fontsize=fontsize, fontweight='bold')
 
-    data_x = packet_counts.index/1000000000
+    data_x = packet_counts.index
     if max(data_x) < expected_time:
-        data_x = dataX + (expected_time - max(data_x))
+        data_x = data_x + (expected_time - max(data_x))
 
-    ax2.plot(data_x, packet_counts.values, color=color)
+    ax2.plot(data_x/1000000000, packet_counts.values, color=color)
 
     ax2.tick_params(axis='y', labelcolor=color)
 
