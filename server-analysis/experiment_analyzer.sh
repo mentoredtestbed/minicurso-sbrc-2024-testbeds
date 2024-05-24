@@ -26,7 +26,7 @@ for f in $(find . -name "*.pcap"); do
     echo "Converting $f to csv..."
     # tshark -r $f -T fields -e frame.time_epoch -e frame.len -e ip.src -e ip.dst -e tcp.srcport -e tcp.dstport -e tcp.seq -e tcp.ack -e tcp.flags -e tcp.window_size -e tcp.analysis.ack_rtt -e tcp.analysis.ack_rtt -e tcp.analysis.bytes_in_flight
     ../pcap_to_csv $f packets.csv
-    python3 ../analyze_output_pcap.py -f packets.csv
+    python3 ../analyze_output_pcap.py -s 16 -f packets.csv
 done
 
 cd ..

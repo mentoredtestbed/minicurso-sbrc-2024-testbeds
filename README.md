@@ -2,6 +2,8 @@
 
 Esse repositório tem como principal apresentar a atividade prática do minicurso **Testbeds para Pesquisa Experimental em Cibersegurança: Da Teoria à Prática** apresentado no evento SBRC 2024 e publicado como capítulo de livro.
 
+O capítulo de livro pode ser acessado em [https://sbrc.sbc.org.br/2024/Ch5.pdf](https://sbrc.sbc.org.br/2024/Ch5.pdf)
+
 Caso deseja citar este trabalho, você pode utilizar o seguinte Bibtex: 
 
 
@@ -57,9 +59,9 @@ Esses arquivos consideram uma sintaxe que compartilha elementos com a [sintaxe d
 
 Esses arquivos descrevem dois ataques DDoS considerando o seguinte cenário:
 
-- 1 servidor Apache sendo executado em um servidor no **Rio de Janeiro** (`ids-rj`)
+- 1 servidor Apache sendo executado em um servidor no **Rio de Janeiro** (`ids-go` para o slowloris) e Paraíba (`ids-pb` para o hping)
   - Além do servidor Apache, um segundo container é usado para monitorar o tráfego de rede com o software `tshark`
-- 10 clientes em **Paraíba** (`ids-pb`) acessando o servidor Apache com requisições web (HTTP) a cada 1 segundo
+- 40 clientes em **Rio Grande do Norte** (`ids-pb`) acessando o servidor Apache com requisições web (HTTP) a cada 1 segundo
   - Os clientes salvam o tempo de solicitação de cada requisição
   - O tempo da solicitação pode ser usado para mensurar a disponibilidade do servidor Apache
 - 30 nós atacando o servidor Apache usando os ataques DDoS slowloris ou hping
@@ -124,8 +126,8 @@ Este repositório contém ferramentas para gerar análises simples sobre esses d
 Baixe o arquivo `.tar.gz` e oo copie para este diretório. Por exemplo:
 
 ```bash
-cp ~/Downloads/experiment_290.tar.gz
 MY_EXP_FILE=experiment_290.tar.gz
+cp ~/Downloads/$MY_EXP_FILE .
 ```
 
 Execute o script para obter a análise dos clientes:
@@ -139,9 +141,9 @@ Você verá algo semelhante a esse log:
 Extracted ../experiment_286.tar.gz
 Running experiment analyzer...
 100%|█████████| 10/10 [00:00<00:00, 2987.61it/s]
-.tmp_exp_analyzer | Group 1 mean: 0.072
-.tmp_exp_analyzer | Group 2 mean: 0.520
-.tmp_exp_analyzer | Group 3 mean: 0.086
+Average time for client response (Before 20 seconds)    : 0.020
+Average time for client response (20 - 30 seconds)      : 0.108
+Average time for client response (After 30 seconds)     : 0.008
 Experiment analyzer finished
 ```
 
